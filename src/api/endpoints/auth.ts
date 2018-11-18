@@ -1,7 +1,7 @@
 import {ApiEndpoint} from '../ApiEndpoint';
 
 export default class extends ApiEndpoint {
-    async login(loginRequest: any): Promise<void> {
+    async login(loginRequest: LoginRequest): Promise<void> {
         const response = await this.adapter.post<void>('/auth/login', {
             data: loginRequest
         });
@@ -9,7 +9,7 @@ export default class extends ApiEndpoint {
         return response.data;
     }
 
-    async signup(registerRequest: any): Promise<void> {
+    async signup(registerRequest: RegisterRequest): Promise<void> {
         const response = await this.adapter.post<void>('/auth/signup', {
             data: registerRequest
         });
