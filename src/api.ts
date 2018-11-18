@@ -2,19 +2,12 @@
 import auth from './api/endpoints/auth';
 import comics from './api/endpoints/comics';
 
-const __endpoints = {
+const __endpointDefns = {
     auth,
     comics
 };
 
-type EndpointsMap = typeof __endpoints;
-type EndpointKeys = (keyof EndpointsMap);
-
-type EndpointInstancesMap = {
-    [K in EndpointKeys]: InstanceType<EndpointsMap[K]>;
-}
-
-export class AlbavulpesApi implements EndpointInstancesMap {
+class AlbaVulpesApiClass {
     protected readonly _adapter: AxiosInstance;
 
     constructor(options?: AxiosRequestConfig) {
@@ -24,7 +17,7 @@ export class AlbavulpesApi implements EndpointInstancesMap {
     }
 
     private createEndpointInstances() {
-        for (let endpointName in __endpoints) {
+        for (let endpointName in __endpointDefns) {
             Object.defineProperty(this, endpointName, {
                 get() {
                     return new this._endpoints[endpointName](this._adapter);
@@ -32,7 +25,13 @@ export class AlbavulpesApi implements EndpointInstancesMap {
             });
         }
     }
-
-    auth: InstanceType<EndpointsMap['auth']>;
-    comics: InstanceType<EndpointsMap['comics']>;
 }
+
+// The typing magic here is to tell TypeScript that this class is internally going to have all the endpoints.
+type EndpointsMap = typeof __endpointDefns;
+type EndpointInstancesMap = {
+    [K in keyof EndpointsMap]: InstanceType<EndpointsMap[K]>;
+}
+type AlbaVulpesApi = new(options?: AxiosRequestConfig) => EndpointInstancesMap & AlbaVulpesApiClass;
+
+export const AlbaVulpesApi: AlbaVulpesApi = AlbaVulpesApiClass as any;
