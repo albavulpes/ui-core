@@ -32,6 +32,6 @@ type EndpointsMap = typeof __endpointDefns;
 type EndpointInstancesMap = {
     [K in keyof EndpointsMap]: InstanceType<EndpointsMap[K]>;
 }
-type AlbaVulpesApi = new(options?: AxiosRequestConfig) => EndpointInstancesMap & AlbaVulpesApiClass;
+export type AlbaVulpesApi = new(options?: AxiosRequestConfig) => EndpointInstancesMap & AlbaVulpesApiClass;
 
 export const AlbaVulpesApi: AlbaVulpesApi = AlbaVulpesApiClass as any;

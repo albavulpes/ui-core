@@ -1,6 +1,12 @@
 import {ApiEndpoint} from '../ApiEndpoint';
 
 export default class extends ApiEndpoint {
+    async me(): Promise<StatusResponse> {
+        const response = await this.adapter.get<StatusResponse>('/auth/me');
+
+        return response.data;
+    }
+
     async login(loginRequest: LoginRequest): Promise<void> {
         const response = await this.adapter.post<void>('/auth/login', {
             data: loginRequest
