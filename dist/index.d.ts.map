@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.ts"],"names":[],"mappings":";AAEA,cAAc,OAAO,CAAC","file":"index.d.ts","sourcesContent":["/// <reference path=\"./types/aspnet.apitypes.d.ts\" />\r\n\r\nexport * from './api';"]}

@@ -50,6 +50,6 @@
     "build": "gulp build",
     "watch": "gulp watch",
     "test": "jest --coverage",
-    "prepack": "yarn && yarn clean && yarn test && yarn build"
+    "prepack": "yarn && yarn clean && yarn build"
   }
 }
