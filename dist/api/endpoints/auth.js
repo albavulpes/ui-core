@@ -52,6 +52,19 @@ var default_1 = (function (_super) {
     function default_1() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    default_1.prototype.me = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.adapter.get('/auth/me')];
+                    case 1:
+                        response = _a.sent();
+                        return [2, response.data];
+                }
+            });
+        });
+    };
     default_1.prototype.login = function (loginRequest) {
         return __awaiter(this, void 0, void 0, function () {
             var response;

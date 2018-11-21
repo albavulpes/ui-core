@@ -68,14 +68,19 @@ interface Image {
     FullSize: string;
 }
 
-interface ArcViewModel extends Arc {
+interface ArcResponse extends Arc {
     ChaptersCount: number;
 }
 
-interface ChapterViewModel extends Chapter {
+interface ChapterResponse extends Chapter {
     PagesCount: number;
 }
 
-interface ComicViewModel extends Comic {
+interface ComicResponse extends Comic {
     ArcsCount: number;
+}
+
+interface StatusResponse {
+    UserName: string;
+    Email: string;
 }
