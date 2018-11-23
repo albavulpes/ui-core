@@ -17,10 +17,12 @@ class AlbaVulpesApiClass {
     }
 
     private createEndpointInstances() {
+        const self = this;
+
         for (let endpointName in __endpointDefns) {
-            Object.defineProperty(this, endpointName, {
+            Object.defineProperty(self, endpointName, {
                 get() {
-                    return new this._endpoints[endpointName](this._adapter);
+                    return new (__endpointDefns as any)[endpointName](this._adapter);
                 }
             });
         }
