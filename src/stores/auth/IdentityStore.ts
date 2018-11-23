@@ -22,14 +22,13 @@ export class IdentityStore extends VuexStore {
         const statusResponse = await this.AuthService.me();
 
         this.updateIdentity(statusResponse);
-
-        this.IsAuthenticated = true;
     }
 
     @Mutation()
     private updateIdentity(identity: StatusResponse) {
         this.UserName = identity.UserName;
         this.Email = identity.Email;
+        this.IsAuthenticated = true;
     }
 }
 
