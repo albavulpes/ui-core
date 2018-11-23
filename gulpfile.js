@@ -34,6 +34,7 @@ gulp.task('compile', function () {
     const tsProject = plugins.typescript.createProject(tsConfigPath, {typescript});
     
     return gulp.src(compileSrc)
+        .pipe(plugins.plumber())
         .pipe(plugins.sourcemaps.init())
         .pipe(tsProject())
         .pipe(plugins.sourcemaps.write('.'))
