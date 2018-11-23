@@ -1,6 +1,7 @@
 import {ActionTree, MutationTree, Store} from 'vuex';
 
 export abstract class VuexStore {
+    __stateMap: any;
     __actionsTree: ActionTree<any, any>;
     __mutationsTree: MutationTree<any>;
 
@@ -8,6 +9,7 @@ export abstract class VuexStore {
 
     constructor() {
         this.__store = new Store<any>({
+            state: () => this.__stateMap,
             actions: this.__actionsTree,
             mutations: this.__mutationsTree
         });
@@ -16,12 +18,18 @@ export abstract class VuexStore {
 
 export function State(): PropertyDecorator {
     return (target: VuexStore, propertyKey: string) => {
+        // Init state props with null (so they can be reactive)
+        target.__stateMap = target.__stateMap || {};
+        target.__stateMap[propertyKey] = null;
+
         Object.defineProperty(target, propertyKey, {
             get() {
-                return this.__store.state[propertyKey];
+                const state = this.__store.state;
+                return state[propertyKey];
             },
             set(value: any) {
-                this.__store.state[propertyKey] = value;
+                const state = this.__store.state;
+                state[propertyKey] = value;
             }
         });
     };
@@ -29,7 +37,7 @@ export function State(): PropertyDecorator {
 
 export function Action(): MethodDecorator {
     return (target: VuexStore, propertyKey: string, descriptor: any) => {
-        const memberMethod = descriptor.value;
+        let memberMethod = descriptor.value;
 
         target.__actionsTree = target.__actionsTree || {};
         target.__actionsTree[propertyKey] = function (context, payload) {
@@ -37,11 +45,7 @@ export function Action(): MethodDecorator {
         };
 
         descriptor.value = function (payload: any) {
-            console.log(target);
-            debugger;
-            console.log('dispatch', propertyKey);
-
-            memberMethod.bind(this);
+            memberMethod = memberMethod.bind(this);
             return this.__store.dispatch(propertyKey, payload);
         };
     };
@@ -49,7 +53,7 @@ export function Action(): MethodDecorator {
 
 export function Mutation(): MethodDecorator {
     return (target: VuexStore, propertyKey: string, descriptor: any) => {
-        const memberMethod = descriptor.value;
+        let memberMethod = descriptor.value;
 
         target.__mutationsTree = target.__mutationsTree || {};
         target.__mutationsTree[propertyKey] = function (state, payload) {
@@ -57,11 +61,7 @@ export function Mutation(): MethodDecorator {
         };
 
         descriptor.value = function (payload: any) {
-            console.log(target);
-            debugger;
-            console.log('commit', propertyKey);
-
-            memberMethod.bind(this);
+            memberMethod = memberMethod.bind(this);
             return this.__store.commit(propertyKey, payload);
         };
     };
