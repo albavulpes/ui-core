@@ -8,17 +8,13 @@ export default class extends ApiEndpoint {
     }
 
     async login(loginRequest: LoginRequest): Promise<void> {
-        const response = await this.adapter.post<void>('/auth/login', {
-            data: loginRequest
-        });
+        const response = await this.adapter.post<void>('/auth/login', loginRequest);
 
         return response.data;
     }
 
     async signup(registerRequest: RegisterRequest): Promise<void> {
-        const response = await this.adapter.post<void>('/auth/signup', {
-            data: registerRequest
-        });
+        const response = await this.adapter.post<void>('/auth/signup', registerRequest);
 
         return response.data;
     }
