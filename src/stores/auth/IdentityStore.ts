@@ -1,24 +1,32 @@
-import {Action, Module, Mutation, VuexModule} from 'vuex-module-decorators';
 import di, {Require} from '../../di';
+import {Action, Mutation, State, VuexStore} from '../../framework/Store';
+
 import {AuthService} from '../../services/auth/AuthService';
 
-@Module
-export class IdentityStore extends VuexModule {
-
-    UserName: string;
-    Email: string;
+export class IdentityStore extends VuexStore {
 
     @Require()
     AuthService: AuthService;
 
-    @Action
+    @State()
+    IsAuthenticated: boolean;
+
+    @State()
+    UserName: string;
+
+    @State()
+    Email: string;
+
+    @Action()
     async fetchIdentity() {
         const statusResponse = await this.AuthService.me();
 
         this.updateIdentity(statusResponse);
+
+        this.IsAuthenticated = true;
     }
 
-    @Mutation
+    @Mutation()
     private updateIdentity(identity: StatusResponse) {
         this.UserName = identity.UserName;
         this.Email = identity.Email;
