@@ -1,5 +1,5 @@
 {
-  "name": "@albavulpes/ui-data",
+  "name": "@albavulpes/ui-core",
   "version": "0.2.0",
   "author": "cypherix93",
   "description": "Data access layer for AlbaVulpes frontend clients.",
@@ -19,8 +19,14 @@
   ],
   "dependencies": {
     "axios": "^0.18.0",
+    "bottlejs": "^1.7.1",
+    "reflect-metadata": "^0.1.12",
     "store": "2.0.12",
-    "url-parse": "^1.4.4"
+    "url-parse": "^1.4.4",
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1",
+    "vuex-module-decorators": "^0.9.1"
   },
   "devDependencies": {
     "@types/jest": "^23.3.9",
