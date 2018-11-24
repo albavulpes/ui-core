@@ -1,17 +1,23 @@
-﻿import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
-import auth from './api/endpoints/auth';
-import comics from './api/endpoints/comics';
+import di, {Require} from '../../di';
+import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
+import auth from '../../api/endpoints/auth';
+import comics from '../../api/endpoints/comics';
+import {ConfigService} from './ConfigService';
 
 const __endpointDefns = {
     auth,
     comics
 };
 
-class AlbaVulpesApiClass {
+class HttpApiClass {
+
+    @Require()
+    ConfigService: ConfigService;
+
     protected readonly _adapter: AxiosInstance;
 
-    constructor(options?: AxiosRequestConfig) {
-        this._adapter = axios.create(options);
+    constructor() {
+        this._adapter = axios.create(this.ConfigService.configuration.http);
 
         this.createEndpointInstances();
     }
@@ -34,6 +40,6 @@ type EndpointsMap = typeof __endpointDefns;
 type EndpointInstancesMap = {
     [K in keyof EndpointsMap]: InstanceType<EndpointsMap[K]>;
 }
-export type AlbaVulpesApi = new(options?: AxiosRequestConfig) => EndpointInstancesMap & AlbaVulpesApiClass;
+export type HttpService = EndpointInstancesMap;
 
-export const AlbaVulpesApi: AlbaVulpesApi = AlbaVulpesApiClass as any;
+di.service('HttpService', HttpApiClass);
