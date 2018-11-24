@@ -1,20 +1,28 @@
 import di, {Require} from '../../di';
 import {HttpService} from '../app/HttpService';
+import {IdentityStore} from '../../stores/auth/IdentityStore';
 
 export class AuthService {
 
     @Require()
-    HttpService: HttpService;
+    private HttpService: HttpService;
+
+    @Require()
+    private IdentityStore: IdentityStore;
 
     async me() {
         return await this.HttpService.auth.me();
     }
 
     async login(emailOrUsername: string, password: string) {
-        return await this.HttpService.auth.login({
+        const response = await this.HttpService.auth.login({
             Email: emailOrUsername,
             Password: password
         });
+
+        await this.IdentityStore.fetchIdentity();
+
+        return response;
     }
 
     async logout() {
