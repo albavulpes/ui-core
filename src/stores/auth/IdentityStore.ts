@@ -30,7 +30,7 @@ export class IdentityStore extends VuexStore {
         }
         catch (error) {
             if (error.response && error.response.status !== 401) {
-                throw error;
+                this.ToastService.error(error.message);
             }
         }
     }
