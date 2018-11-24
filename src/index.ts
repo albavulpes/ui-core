@@ -1,32 +1,20 @@
 ﻿/// <reference path="./types/aspnet.apitypes.d.ts" />
 import Vue, {PluginObject, VueConstructor} from 'vue';
+import di from './di';
 
-import http, {HttpOptions} from './plugins/http';
+import {ConfigService} from './services/app/ConfigService';
+import {IConfigurationMap} from './framework/interfaces/IConfigService';
 
-interface CoreOptions {
-    http: OptionsProvided<HttpOptions>;
-}
+function initCore(Vue: VueConstructor<Vue>, options: IConfigurationMap) {
+    const configService = di.container.ConfigService as ConfigService;
 
-type OptionsProvided<TOptions> = TOptions | boolean;
-
-function initCore(Vue: VueConstructor<Vue>, options: CoreOptions) {
     if (options.http) {
-        usePlugin(http, options.http);
+        configService.configure('http', options.http);
     }
-}
-
-function usePlugin<TOptions>(plugin: PluginObject<TOptions>, options?: OptionsProvided<TOptions>) {
-    let optionsToUse;
-
-    if (typeof options === 'object') {
-        optionsToUse = options;
-    }
-
-    Vue.use(http, optionsToUse);
 }
 
 export default {
     install(Vue, options) {
         initCore(Vue, options);
     }
-} as PluginObject<CoreOptions>;
+} as PluginObject<IConfigurationMap>;
