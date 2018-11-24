@@ -1,12 +1,16 @@
 import di, {Require} from '../../di';
-import {Action, Mutation, State, VuexStore} from '../../framework/Store';
+import {Action, Mutation, State, VuexStore} from '../../framework/decorators/Store';
 
 import {AuthService} from '../../services/auth/AuthService';
+import {ToastService} from '../../services/ui/ToastService';
 
 export class IdentityStore extends VuexStore {
 
     @Require()
     AuthService: AuthService;
+
+    @Require()
+    ToastService: ToastService;
 
     @State()
     IsAuthenticated: boolean;
@@ -19,9 +23,16 @@ export class IdentityStore extends VuexStore {
 
     @Action()
     async fetchIdentity() {
-        const statusResponse = await this.AuthService.me();
+        try {
+            const statusResponse = await this.AuthService.me();
 
-        this.updateIdentity(statusResponse);
+            this.updateIdentity(statusResponse);
+        }
+        catch (error) {
+            if (error.response && error.response.status !== 401) {
+                throw error;
+            }
+        }
     }
 
     @Mutation()
