@@ -1,3 +1,4 @@
+import di from '../../di';
 import {IConfigService, IConfigurationMap} from '../../framework/interfaces/IConfigService';
 import merge from 'lodash/merge';
 
@@ -8,3 +9,5 @@ export class ConfigService implements IConfigService {
         this.configuration[configKey] = merge((this.configuration[configKey] || {}), configuration);
     }
 }
+
+di.service('ConfigService', ConfigService);
