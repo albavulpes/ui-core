@@ -20,6 +20,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bottlejs": "^1.7.1",
+    "izitoast": "^1.4.0",
+    "lodash": "^4.17.11",
     "reflect-metadata": "^0.1.12",
     "store": "2.0.12",
     "url-parse": "^1.4.4",
@@ -30,6 +32,7 @@
   },
   "devDependencies": {
     "@types/jest": "^23.3.9",
+    "@types/lodash": "^4.14.118",
     "@types/node": "^10.12.9",
     "@types/storejs": "2.0.3",
     "babel-jest": "^23.6.0",
