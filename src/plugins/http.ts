@@ -1,12 +1,8 @@
 import {PluginObject} from 'vue';
 import {AlbaVulpesApi} from '../api';
-import {AxiosRequestConfig} from 'axios';
+import {IHttpOptions} from '../framework/interfaces/IHttpService';
 
-export interface HttpOptions extends AxiosRequestConfig {
-
-}
-
-function instantiateHttpApi(options: HttpOptions) {
+function instantiateHttpApi(options: IHttpOptions) {
     return new AlbaVulpesApi(options);
 }
 
@@ -14,4 +10,4 @@ export default {
     install(Vue, options) {
         Vue.prototype.$http = instantiateHttpApi(options);
     }
-} as PluginObject<HttpOptions>;
+} as PluginObject<IHttpOptions>;
