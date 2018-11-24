@@ -1,5 +1,6 @@
-import Vue from 'vue';
-export declare class AuthService extends Vue {
+export declare class AuthService {
+    private HttpService;
+    private IdentityStore;
     me(): Promise<StatusResponse>;
     login(emailOrUsername: string, password: string): Promise<void>;
     logout(): Promise<void>;

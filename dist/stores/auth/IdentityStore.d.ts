@@ -1,9 +1,12 @@
-import { VuexModule } from 'vuex-module-decorators';
+import { VuexStore } from '../../framework/decorators/Store';
 import { AuthService } from '../../services/auth/AuthService';
-export declare class IdentityStore extends VuexModule {
+import { ToastService } from '../../services/ui/ToastService';
+export declare class IdentityStore extends VuexStore {
+    AuthService: AuthService;
+    ToastService: ToastService;
+    IsAuthenticated: boolean;
     UserName: string;
     Email: string;
-    AuthService: AuthService;
     fetchIdentity(): Promise<void>;
     private updateIdentity;
 }

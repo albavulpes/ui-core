@@ -1,0 +1,1 @@
+{"version":3,"sources":["framework/interfaces/IHttpService.ts"],"names":[],"mappings":"","file":"IHttpService.js","sourcesContent":["import {AxiosRequestConfig} from 'axios';\r\n\r\nexport interface IHttpService {\r\n\r\n}\r\n\r\nexport interface IHttpOptions extends AxiosRequestConfig {\r\n\r\n}"]}
