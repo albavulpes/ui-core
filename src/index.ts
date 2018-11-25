@@ -1,6 +1,6 @@
 ﻿/// <reference path="./types/aspnet.apitypes.d.ts" />
 import Vue, {PluginObject, VueConstructor} from 'vue';
-import {Inject, Service} from 'typedi';
+import {Container, Inject, Service} from 'typedi';
 
 import {ConfigService} from './services/app/ConfigService';
 import {IConfigurationMap} from './framework/interfaces/IConfigService';
@@ -9,6 +9,7 @@ import {IConfigurationMap} from './framework/interfaces/IConfigService';
 
 @Service()
 class UiCore {
+
     @Inject()
     ConfigService: ConfigService;
 
@@ -21,6 +22,6 @@ class UiCore {
 
 export default {
     install(Vue, options) {
-        new UiCore().initCore(Vue, options);
+        Container.get(UiCore).initCore(Vue, options);
     }
 } as PluginObject<IConfigurationMap>;
