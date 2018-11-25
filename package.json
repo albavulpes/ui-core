@@ -24,6 +24,7 @@
     "lodash": "^4.17.11",
     "reflect-metadata": "^0.1.12",
     "store": "2.0.12",
+    "typedi": "^0.8.0",
     "url-parse": "^1.4.4",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",

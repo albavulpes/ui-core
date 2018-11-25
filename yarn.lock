@@ -5440,6 +5440,11 @@ type-check@~0.3.2:
   dependencies:
     prelude-ls "~1.1.2"
 
+typedi@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/typedi/-/typedi-0.8.0.tgz#d8e203bd1d41a96e2b0a5c6295147d74b2b2d03e"
+  integrity sha512-/c7Bxnm6eh5kXx2I+mTuO+2OvoWni5+rXA3PhXwVWCtJRYmz3hMok5s1AKLzoDvNAZqj/Q/acGstN0ri5aQoOA==
+
 typescript@^3.1.6:
   version "3.1.6"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.1.6.tgz#b6543a83cfc8c2befb3f4c8fba6896f5b0c9be68"
