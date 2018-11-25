@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import di, { Require } from '../../di';
+import { Inject, Service } from 'typedi';
 import { Action, Mutation, State, VuexStore } from '../../framework/decorators/Store';
 import { AuthService } from '../../services/auth/AuthService';
 import { ToastService } from '../../services/ui/ToastService';
@@ -37,11 +37,11 @@ var IdentityStore = (function (_super) {
         this.IsAuthenticated = true;
     };
     tslib_1.__decorate([
-        Require(),
+        Inject(function () { return AuthService; }),
         tslib_1.__metadata("design:type", AuthService)
     ], IdentityStore.prototype, "AuthService", void 0);
     tslib_1.__decorate([
-        Require(),
+        Inject(),
         tslib_1.__metadata("design:type", ToastService)
     ], IdentityStore.prototype, "ToastService", void 0);
     tslib_1.__decorate([
@@ -68,9 +68,11 @@ var IdentityStore = (function (_super) {
         tslib_1.__metadata("design:paramtypes", [Object]),
         tslib_1.__metadata("design:returntype", void 0)
     ], IdentityStore.prototype, "updateIdentity", null);
+    IdentityStore = tslib_1.__decorate([
+        Service()
+    ], IdentityStore);
     return IdentityStore;
 }(VuexStore));
 export { IdentityStore };
-di.service('IdentityStore', IdentityStore);
 
 //# sourceMappingURL=IdentityStore.js.map

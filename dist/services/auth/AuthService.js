@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import di, { Require } from '../../di';
+import { Inject, Service } from 'typedi';
 import { IdentityStore } from '../../stores/auth/IdentityStore';
 var AuthService = (function () {
     function AuthService() {
@@ -58,16 +58,18 @@ var AuthService = (function () {
         });
     };
     tslib_1.__decorate([
-        Require(),
+        Inject('HttpService'),
         tslib_1.__metadata("design:type", Object)
     ], AuthService.prototype, "HttpService", void 0);
     tslib_1.__decorate([
-        Require(),
+        Inject(function () { return IdentityStore; }),
         tslib_1.__metadata("design:type", IdentityStore)
     ], AuthService.prototype, "IdentityStore", void 0);
+    AuthService = tslib_1.__decorate([
+        Service()
+    ], AuthService);
     return AuthService;
 }());
 export { AuthService };
-di.service('AuthService', AuthService);
 
 //# sourceMappingURL=AuthService.js.map

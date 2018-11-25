@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import di, { Require } from '../../di';
+import { Inject, Service } from 'typedi';
 import { ConfigService } from '../app/ConfigService';
 import 'izitoast/dist/css/iziToast.min.css';
 import iziToast from 'izitoast';
@@ -20,12 +20,15 @@ var ToastService = (function () {
         iziToast.warning(tslib_1.__assign({ message: message }, options));
     };
     tslib_1.__decorate([
-        Require(),
+        Inject(),
         tslib_1.__metadata("design:type", ConfigService)
     ], ToastService.prototype, "ConfigService", void 0);
+    ToastService = tslib_1.__decorate([
+        Service(),
+        tslib_1.__metadata("design:paramtypes", [])
+    ], ToastService);
     return ToastService;
 }());
 export { ToastService };
-di.service('ToastService', ToastService);
 
 //# sourceMappingURL=ToastService.js.map

@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import di, { Require } from '../../di';
+import { Inject, Service } from 'typedi';
 import axios from 'axios';
 import auth from '../../api/endpoints/auth';
 import comics from '../../api/endpoints/comics';
@@ -27,11 +27,14 @@ var HttpApiClass = (function () {
         }
     };
     tslib_1.__decorate([
-        Require(),
+        Inject(),
         tslib_1.__metadata("design:type", ConfigService)
     ], HttpApiClass.prototype, "ConfigService", void 0);
+    HttpApiClass = tslib_1.__decorate([
+        Service('HttpService'),
+        tslib_1.__metadata("design:paramtypes", [])
+    ], HttpApiClass);
     return HttpApiClass;
 }());
-di.service('HttpService', HttpApiClass);
 
 //# sourceMappingURL=HttpService.js.map
