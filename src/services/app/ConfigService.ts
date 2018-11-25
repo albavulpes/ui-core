@@ -1,8 +1,8 @@
-import {Service} from '../../di';
+import {Service} from 'typedi';
 import {IConfigService, IConfigurationMap} from '../../framework/interfaces/IConfigService';
 import merge from 'lodash/merge';
 
-@Service('ConfigService')
+@Service()
 export class ConfigService implements IConfigService {
     configuration: Partial<IConfigurationMap> = {};
 
