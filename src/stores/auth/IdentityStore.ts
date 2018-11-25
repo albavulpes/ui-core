@@ -7,11 +7,11 @@ import {ToastService} from '../../services/ui/ToastService';
 @Service()
 export class IdentityStore extends VuexStore {
 
-    @Inject(() => AuthService)
-    AuthService: AuthService;
+    @Inject(type => AuthService)
+    private AuthService: AuthService;
 
     @Inject()
-    ToastService: ToastService;
+    private ToastService: ToastService;
 
     @State()
     IsAuthenticated: boolean;

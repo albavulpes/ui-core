@@ -5,10 +5,10 @@ import {IdentityStore} from '../../stores/auth/IdentityStore';
 @Service()
 export class AuthService {
 
-    @Inject('HttpService')
+    @Inject()
     private HttpService: HttpService;
 
-    @Inject(() => IdentityStore)
+    @Inject(type => AuthService)
     private IdentityStore: IdentityStore;
 
     async me() {

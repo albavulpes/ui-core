@@ -1,5 +1,4 @@
 import {Service} from 'typedi';
-import {IConfigService, IConfigurationMap} from '../../framework/interfaces/IConfigService';
 import merge from 'lodash/merge';
 
 @Service()

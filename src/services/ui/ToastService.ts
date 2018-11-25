@@ -1,5 +1,4 @@
-import {Inject, Service} from 'typedi';
-import {IToastService} from '../../framework/interfaces/IToastService';
+import {Service} from 'typedi';
 import {ConfigService} from '../app/ConfigService';
 
 import 'izitoast/dist/css/iziToast.min.css';
@@ -16,27 +15,27 @@ export class ToastService implements IToastService {
         iziToast.success({
             message,
             ...options
-        })
+        });
     }
 
     error(message: string, options?: IziToastSettings) {
         iziToast.error({
             message,
             ...options
-        })
+        });
     }
 
     info(message: string, options?: IziToastSettings) {
         iziToast.info({
             message,
             ...options
-        })
+        });
     }
 
     warning(message: string, options?: IziToastSettings) {
         iziToast.warning({
             message,
             ...options
-        })
+        });
     }
 }

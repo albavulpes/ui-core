@@ -4,13 +4,12 @@ import Vue, {PluginObject, VueConstructor} from 'vue';
 import {Container, Inject, Service} from 'typedi';
 
 import {ConfigService} from './services/app/ConfigService';
-import {IConfigurationMap} from './framework/interfaces/IConfigService';
 
 @Service()
 class UiCore {
 
     @Inject()
-    ConfigService: ConfigService;
+    private ConfigService: ConfigService;
 
     initCore(Vue: VueConstructor<Vue>, options: IConfigurationMap) {
         if (options.http) {

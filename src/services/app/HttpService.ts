@@ -1,5 +1,5 @@
-import {Inject, Service} from 'typedi';
-import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
+import {Service} from 'typedi';
+import axios, {AxiosInstance} from 'axios';
 import auth from '../../api/endpoints/auth';
 import comics from '../../api/endpoints/comics';
 import {ConfigService} from './ConfigService';
@@ -9,8 +9,9 @@ const __endpointDefns = {
     comics
 };
 
-@Service('HttpService')
-export class HttpApiClass {
+@Service()
+export class HttpService<TEndpoints extends IHttpEndpoints> implements IHttpService<TEndpoints> {
+    [x: string]: import('D:/src/albavulpes/ui-core/src/api/ApiEndpoint').ApiEndpoint;
 
     protected readonly _adapter: AxiosInstance;
 
@@ -32,10 +33,3 @@ export class HttpApiClass {
         }
     }
 }
-
-// The typing magic here is to tell TypeScript that this class is internally going to have all the endpoints.
-type EndpointsMap = typeof __endpointDefns;
-type EndpointInstancesMap = {
-    [K in keyof EndpointsMap]: InstanceType<EndpointsMap[K]>;
-}
-export type HttpService = EndpointInstancesMap;
