@@ -10,14 +10,11 @@ const __endpointDefns = {
 };
 
 @Service('HttpService')
-class HttpApiClass {
-
-    @Inject()
-    ConfigService: ConfigService;
+export class HttpApiClass {
 
     protected readonly _adapter: AxiosInstance;
 
-    constructor() {
+    constructor(private ConfigService: ConfigService) {
         this._adapter = axios.create(this.ConfigService.configuration.http);
 
         this.createEndpointInstances();

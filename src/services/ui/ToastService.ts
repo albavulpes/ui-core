@@ -8,10 +8,7 @@ import iziToast, {IziToastSettings} from 'izitoast';
 @Service()
 export class ToastService implements IToastService {
 
-    @Inject()
-    ConfigService: ConfigService;
-
-    constructor() {
+    constructor(private ConfigService: ConfigService) {
         iziToast.settings(this.ConfigService.configuration.toast);
     }
 
