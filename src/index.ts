@@ -1,13 +1,15 @@
 ﻿/// <reference path="./types/aspnet.apitypes.d.ts" />
 import Vue, {PluginObject, VueConstructor} from 'vue';
-import {Require} from './di';
+import {Inject, Service} from 'typedi';
 
 import {ConfigService} from './services/app/ConfigService';
 import {IConfigurationMap} from './framework/interfaces/IConfigService';
 
-class UiCore {
+// import './modules';
 
-    @Require()
+@Service()
+class UiCore {
+    @Inject()
     ConfigService: ConfigService;
 
     initCore(Vue: VueConstructor<Vue>, options: IConfigurationMap) {

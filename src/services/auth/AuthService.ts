@@ -1,13 +1,14 @@
-import di, {Require} from '../../di';
+import {Inject, Service} from 'typedi';
 import {HttpService} from '../app/HttpService';
 import {IdentityStore} from '../../stores/auth/IdentityStore';
 
+@Service()
 export class AuthService {
 
-    @Require()
+    @Inject('HttpService')
     private HttpService: HttpService;
 
-    @Require()
+    @Inject(() => IdentityStore)
     private IdentityStore: IdentityStore;
 
     async me() {
@@ -37,5 +38,3 @@ export class AuthService {
         });
     }
 }
-
-di.service('AuthService', AuthService);

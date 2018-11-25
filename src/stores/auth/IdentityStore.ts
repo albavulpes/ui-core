@@ -1,15 +1,16 @@
-import di, {Require} from '../../di';
+import {Inject, Service} from 'typedi';
 import {Action, Mutation, State, VuexStore} from '../../framework/decorators/Store';
 
 import {AuthService} from '../../services/auth/AuthService';
 import {ToastService} from '../../services/ui/ToastService';
 
+@Service()
 export class IdentityStore extends VuexStore {
 
-    @Require()
+    @Inject(() => AuthService)
     AuthService: AuthService;
 
-    @Require()
+    @Inject()
     ToastService: ToastService;
 
     @State()
@@ -42,5 +43,3 @@ export class IdentityStore extends VuexStore {
         this.IsAuthenticated = true;
     }
 }
-
-di.service('IdentityStore', IdentityStore);

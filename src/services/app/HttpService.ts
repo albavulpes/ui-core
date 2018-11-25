@@ -1,4 +1,4 @@
-import di, {Require} from '../../di';
+import {Inject, Service} from 'typedi';
 import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
 import auth from '../../api/endpoints/auth';
 import comics from '../../api/endpoints/comics';
@@ -9,9 +9,10 @@ const __endpointDefns = {
     comics
 };
 
+@Service('HttpService')
 class HttpApiClass {
 
-    @Require()
+    @Inject()
     ConfigService: ConfigService;
 
     protected readonly _adapter: AxiosInstance;
@@ -41,5 +42,3 @@ type EndpointInstancesMap = {
     [K in keyof EndpointsMap]: InstanceType<EndpointsMap[K]>;
 }
 export type HttpService = EndpointInstancesMap;
-
-di.service('HttpService', HttpApiClass);

@@ -1,13 +1,14 @@
-import di, {Require} from '../../di';
+import {Inject, Service} from 'typedi';
 import {IToastService} from '../../framework/interfaces/IToastService';
 import {ConfigService} from '../app/ConfigService';
 
 import 'izitoast/dist/css/iziToast.min.css';
 import iziToast, {IziToastSettings} from 'izitoast';
 
+@Service()
 export class ToastService implements IToastService {
 
-    @Require()
+    @Inject()
     ConfigService: ConfigService;
 
     constructor() {
@@ -42,5 +43,3 @@ export class ToastService implements IToastService {
         })
     }
 }
-
-di.service('ToastService', ToastService);
