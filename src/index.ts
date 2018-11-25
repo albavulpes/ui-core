@@ -1,11 +1,10 @@
 ﻿/// <reference path="./types/aspnet.apitypes.d.ts" />
+import 'reflect-metadata';
 import Vue, {PluginObject, VueConstructor} from 'vue';
 import {Container, Inject, Service} from 'typedi';
 
 import {ConfigService} from './services/app/ConfigService';
 import {IConfigurationMap} from './framework/interfaces/IConfigService';
-
-// import './modules';
 
 @Service()
 class UiCore {
@@ -16,6 +15,9 @@ class UiCore {
     initCore(Vue: VueConstructor<Vue>, options: IConfigurationMap) {
         if (options.http) {
             this.ConfigService.configure('http', options.http);
+        }
+        if (options.toast) {
+            this.ConfigService.configure('toast', options.toast);
         }
     }
 }
