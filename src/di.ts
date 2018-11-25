@@ -1,40 +1,20 @@
-﻿import 'reflect-metadata';
-import Bottle from 'bottlejs';
+﻿import {Container} from 'typedi';
 
-const bottle = new Bottle();
+export function Require(serviceName?: string): PropertyDecorator {
+    return <T>(prototype: any, propertyKey: string) => {
+        let identifier: any = serviceName;
 
-export function Service(serviceName: string): ClassDecorator {
-    return (constructor: any) => {
-        Reflect.defineMetadata('service:name', serviceName, constructor);
-
-        bottle.service(serviceName, constructor);
-    }
-}
-
-export function Factory(serviceName: string, factoryFunction: (container: Bottle.IContainer) => any): ClassDecorator {
-    return (constructor: any) => {
-        Reflect.defineMetadata('service:name', serviceName, constructor);
-
-        bottle.factory(serviceName, factoryFunction);
-
-        return constructor;
-    }
-}
-
-export function Require(): PropertyDecorator {
-    return (prototype: any, propertyKey: string) => {
-        const designType = Reflect.getMetadata('design:type', prototype, propertyKey) as Function;
-        const serviceName = Reflect.getMetadata('service:name', designType);
+        if (!identifier) {
+            identifier = Reflect.getMetadata('design:type', prototype, propertyKey);
+        }
 
         if (delete prototype[propertyKey]) {
             Object.defineProperty(prototype, propertyKey, {
                 get() {
-                    console.info(`Resolved dependency: ${serviceName}`);
-                    return bottle.container[serviceName];
+                    console.debug(`Resolved dependency: ${identifier}`);
+                    return Container.get(identifier);
                 }
             });
         }
     };
 }
-
-export default bottle;
