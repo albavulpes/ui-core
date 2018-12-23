@@ -1,33 +1,50 @@
 import {Service} from 'typedi';
-import axios, {AxiosInstance} from 'axios';
+import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
 import auth from '../../api/endpoints/auth';
 import comics from '../../api/endpoints/comics';
+
 import {ConfigService} from './ConfigService';
+import {ApiEndpoint} from '../../api/ApiEndpoint';
+
+export interface IHttpEndpoints {
+    [x: string]: ApiEndpoint;
+}
+
+export interface IHttpOptions extends AxiosRequestConfig {
+    // endpoints: { [key: string]: ApiEndpoint }
+}
 
 const __endpointDefns = {
     auth,
     comics
 };
 
-@Service()
-export class HttpService<TEndpoints extends IHttpEndpoints> implements IHttpService<TEndpoints> {
-    [x: string]: import('D:/src/albavulpes/ui-core/src/api/ApiEndpoint').ApiEndpoint;
+type eDefns = typeof __endpointDefns;
 
+type EndpointInstancesMap = {
+    [K in keyof eDefns]: InstanceType<eDefns[K]>;
+}
+
+@Service()
+export class HttpService {
     protected readonly _adapter: AxiosInstance;
 
-    constructor(private ConfigService: ConfigService) {
-        this._adapter = axios.create(this.ConfigService.configuration.http);
+    api: EndpointInstancesMap;
 
-        this.createEndpointInstances();
+    constructor(ConfigService: ConfigService) {
+        this._adapter = axios.create(ConfigService.configuration.http);
+
+        this.configureEndpoints();
     }
 
-    private createEndpointInstances() {
+    private configureEndpoints() {
         const self = this;
+        self.api = {} as any;
 
         for (let endpointName in __endpointDefns) {
-            Object.defineProperty(self, endpointName, {
+            Object.defineProperty(self.api, endpointName, {
                 get() {
-                    return new (__endpointDefns as any)[endpointName](this._adapter);
+                    return new (__endpointDefns as any)[endpointName](self._adapter);
                 }
             });
         }

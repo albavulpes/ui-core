@@ -4,6 +4,20 @@ import {ConfigService} from '../app/ConfigService';
 import 'izitoast/dist/css/iziToast.min.css';
 import iziToast, {IziToastSettings} from 'izitoast';
 
+export interface IToastService {
+    success: IToastMethod;
+    error: IToastMethod;
+    warning: IToastMethod;
+    info: IToastMethod;
+}
+
+export interface IToastMethod {
+    (message: string, options?: IziToastSettings): void;
+}
+
+export interface IToastOptions extends IziToastSettings {
+}
+
 @Service()
 export class ToastService implements IToastService {
 

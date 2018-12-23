@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import Vue, {PluginObject, VueConstructor} from 'vue';
 import {Container, Inject, Service} from 'typedi';
 
-import {ConfigService} from './services/app/ConfigService';
+import {ConfigService, IConfigurationMap} from './services/app/ConfigService';
 
 @Service()
 class UiCore {
