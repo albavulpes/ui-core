@@ -1,6 +1,14 @@
-import { IConfigService, IConfigurationMap } from '../../framework/interfaces/IConfigService';
+import { IHttpOptions } from './HttpService';
+import { IToastOptions } from '../ui/ToastService';
+export interface IConfigService {
+    configuration: Partial<IConfigurationMap>;
+    configure<TKey extends keyof IConfigurationMap>(configKey: TKey, configuration: IConfigurationMap[TKey]): void;
+}
+export interface IConfigurationMap {
+    http: IHttpOptions;
+    toast: IToastOptions;
+}
 export declare class ConfigService implements IConfigService {
     configuration: Partial<IConfigurationMap>;
     configure<TKey extends keyof IConfigurationMap>(configKey: TKey, configuration: IConfigurationMap[TKey]): void;
 }
-//# sourceMappingURL=ConfigService.d.ts.map

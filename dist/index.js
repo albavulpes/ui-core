@@ -1,5 +1,6 @@
 import * as tslib_1 from "tslib";
-import { Inject, Service } from 'typedi';
+import 'reflect-metadata';
+import { Container, Inject, Service } from 'typedi';
 import { ConfigService } from './services/app/ConfigService';
 var UiCore = (function () {
     function UiCore() {
@@ -7,6 +8,9 @@ var UiCore = (function () {
     UiCore.prototype.initCore = function (Vue, options) {
         if (options.http) {
             this.ConfigService.configure('http', options.http);
+        }
+        if (options.toast) {
+            this.ConfigService.configure('toast', options.toast);
         }
     };
     tslib_1.__decorate([
@@ -20,7 +24,7 @@ var UiCore = (function () {
 }());
 export default {
     install: function (Vue, options) {
-        new UiCore().initCore(Vue, options);
+        Container.get(UiCore).initCore(Vue, options);
     }
 };
 

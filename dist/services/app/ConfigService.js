@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { Service } from '../../di';
+import { Service } from 'typedi';
 import merge from 'lodash/merge';
 var ConfigService = (function () {
     function ConfigService() {
@@ -9,7 +9,7 @@ var ConfigService = (function () {
         this.configuration[configKey] = merge((this.configuration[configKey] || {}), configuration);
     };
     ConfigService = tslib_1.__decorate([
-        Service('ConfigService')
+        Service()
     ], ConfigService);
     return ConfigService;
 }());

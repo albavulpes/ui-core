@@ -5,4 +5,3 @@ export default class extends ApiEndpoint {
     signup(registerRequest: RegisterRequest): Promise<void>;
     logout(): Promise<void>;
 }
-//# sourceMappingURL=auth.d.ts.map

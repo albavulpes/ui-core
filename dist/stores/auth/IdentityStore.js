@@ -37,7 +37,7 @@ var IdentityStore = (function (_super) {
         this.IsAuthenticated = true;
     };
     tslib_1.__decorate([
-        Inject(function () { return AuthService; }),
+        Inject(function (type) { return AuthService; }),
         tslib_1.__metadata("design:type", AuthService)
     ], IdentityStore.prototype, "AuthService", void 0);
     tslib_1.__decorate([

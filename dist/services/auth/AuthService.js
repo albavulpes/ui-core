@@ -1,5 +1,6 @@
 import * as tslib_1 from "tslib";
 import { Inject, Service } from 'typedi';
+import { HttpService } from '../app/HttpService';
 import { IdentityStore } from '../../stores/auth/IdentityStore';
 var AuthService = (function () {
     function AuthService() {
@@ -8,7 +9,7 @@ var AuthService = (function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, this.HttpService.auth.me()];
+                    case 0: return [4, this.HttpService.api.auth.me()];
                     case 1: return [2, _a.sent()];
                 }
             });
@@ -19,7 +20,7 @@ var AuthService = (function () {
             var response;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, this.HttpService.auth.login({
+                    case 0: return [4, this.HttpService.api.auth.login({
                             Email: emailOrUsername,
                             Password: password
                         })];
@@ -37,7 +38,7 @@ var AuthService = (function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, this.HttpService.auth.logout()];
+                    case 0: return [4, this.HttpService.api.auth.logout()];
                     case 1: return [2, _a.sent()];
                 }
             });
@@ -47,7 +48,7 @@ var AuthService = (function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, this.HttpService.auth.signup({
+                    case 0: return [4, this.HttpService.api.auth.signup({
                             UserName: username,
                             Email: email,
                             Password: password
@@ -58,11 +59,11 @@ var AuthService = (function () {
         });
     };
     tslib_1.__decorate([
-        Inject('HttpService'),
-        tslib_1.__metadata("design:type", Object)
+        Inject(),
+        tslib_1.__metadata("design:type", HttpService)
     ], AuthService.prototype, "HttpService", void 0);
     tslib_1.__decorate([
-        Inject(function () { return IdentityStore; }),
+        Inject(function (type) { return IdentityStore; }),
         tslib_1.__metadata("design:type", IdentityStore)
     ], AuthService.prototype, "IdentityStore", void 0);
     AuthService = tslib_1.__decorate([

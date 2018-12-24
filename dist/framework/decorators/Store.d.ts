@@ -9,4 +9,3 @@ export declare abstract class VuexStore {
 export declare function State(): PropertyDecorator;
 export declare function Action(): MethodDecorator;
 export declare function Mutation(): MethodDecorator;
-//# sourceMappingURL=Store.d.ts.map

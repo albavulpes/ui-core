@@ -1,33 +1,19 @@
-import 'reflect-metadata';
-import Bottle from 'bottlejs';
-var bottle = new Bottle();
-export function Service(serviceName) {
-    return function (constructor) {
-        Reflect.defineMetadata('service:name', serviceName, constructor);
-        bottle.service(serviceName, constructor);
-    };
-}
-export function Factory(serviceName, factoryFunction) {
-    return function (constructor) {
-        Reflect.defineMetadata('service:name', serviceName, constructor);
-        bottle.factory(serviceName, factoryFunction);
-        return constructor;
-    };
-}
-export function Require() {
+import { Container } from 'typedi';
+export function Require(serviceName) {
     return function (prototype, propertyKey) {
-        var designType = Reflect.getMetadata('design:type', prototype, propertyKey);
-        var serviceName = Reflect.getMetadata('service:name', designType);
+        var identifier = serviceName;
+        if (!identifier) {
+            identifier = Reflect.getMetadata('design:type', prototype, propertyKey);
+        }
         if (delete prototype[propertyKey]) {
             Object.defineProperty(prototype, propertyKey, {
                 get: function () {
-                    console.info("Resolved dependency: " + serviceName);
-                    return bottle.container[serviceName];
+                    console.debug("Resolved dependency: " + identifier);
+                    return Container.get(identifier);
                 }
             });
         }
     };
 }
-export default bottle;
 
 //# sourceMappingURL=di.js.map

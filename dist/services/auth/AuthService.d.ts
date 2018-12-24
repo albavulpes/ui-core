@@ -6,4 +6,3 @@ export declare class AuthService {
     logout(): Promise<void>;
     signup(username: string, email: string, password: string): Promise<void>;
 }
-//# sourceMappingURL=AuthService.d.ts.map
