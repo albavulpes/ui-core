@@ -17,7 +17,7 @@
   "files": [
     "dist/"
   ],
-  "dependencies": {
+  "peerDependencies": {
     "axios": "^0.18.0",
     "izitoast": "^1.4.0",
     "lodash": "^4.17.11",
@@ -47,6 +47,7 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-typescript": "^5.0.0-alpha.3",
     "gulp-watch": "^5.0.1",
+    "install-peers": "^1.0.3",
     "jest": "^23.6.0",
     "merge-stream": "^1.0.1",
     "rimraf": "^2.6.2",
