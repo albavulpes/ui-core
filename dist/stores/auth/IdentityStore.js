@@ -25,6 +25,7 @@ var IdentityStore = (function (_super) {
                         if (error_1.response && error_1.response.status !== 401) {
                             this.ToastService.error(error_1.message);
                         }
+                        this.IsAuthenticated = false;
                         return [3, 3];
                     case 3: return [2];
                 }
