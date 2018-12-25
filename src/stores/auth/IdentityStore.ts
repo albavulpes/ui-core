@@ -33,6 +33,8 @@ export class IdentityStore extends VuexStore {
             if (error.response && error.response.status !== 401) {
                 this.ToastService.error(error.message);
             }
+
+            this.IsAuthenticated = false;
         }
     }
 
