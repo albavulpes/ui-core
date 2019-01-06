@@ -2,6 +2,9 @@ import {Service} from 'typedi';
 import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
 import auth from '../../api/endpoints/auth';
 import comics from '../../api/endpoints/comics';
+import arcs from '../../api/endpoints/arcs';
+import pages from '../../api/endpoints/pages';
+import chapters from '../../api/endpoints/chapters';
 
 import {ConfigService} from './ConfigService';
 import {ApiEndpoint} from '../../api/ApiEndpoint';
@@ -16,7 +19,10 @@ export interface IHttpOptions extends AxiosRequestConfig {
 
 const __endpointDefns = {
     auth,
-    comics
+    comics,
+    arcs,
+    chapters,
+    pages
 };
 
 type eDefns = typeof __endpointDefns;
