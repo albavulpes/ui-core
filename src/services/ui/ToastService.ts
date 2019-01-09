@@ -5,6 +5,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 import iziToast, {IziToastSettings} from 'izitoast';
 
 export interface IToastService {
+    clear(): void;
     success: IToastMethod;
     error: IToastMethod;
     warning: IToastMethod;
@@ -23,6 +24,10 @@ export class ToastService implements IToastService {
 
     constructor(private ConfigService: ConfigService) {
         iziToast.settings(this.ConfigService.configuration.toast);
+    }
+
+    clear() {
+        iziToast.destroy();
     }
 
     success(message: string, options?: IziToastSettings) {
