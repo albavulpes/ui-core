@@ -3,6 +3,7 @@ import {Action, Mutation, State, VuexStore} from '../../framework/decorators/Sto
 
 import {AuthService} from '../../services/auth/AuthService';
 import {ToastService} from '../../services/ui/ToastService';
+import {LoaderService} from '../../services/ui/LoaderService';
 
 @Service()
 export class IdentityStore extends VuexStore {
@@ -12,6 +13,9 @@ export class IdentityStore extends VuexStore {
 
     @Inject()
     private ToastService: ToastService;
+
+    @Inject()
+    private LoaderService: LoaderService;
 
     @State()
     IsAuthenticated: boolean;
@@ -25,9 +29,13 @@ export class IdentityStore extends VuexStore {
     @Action()
     async fetchIdentity() {
         try {
+            this.LoaderService.show();
+
             const statusResponse = await this.AuthService.me();
 
             this.updateIdentity(statusResponse);
+
+            this.LoaderService.hide();
         }
         catch (error) {
             if (error.response && error.response.status !== 401) {
