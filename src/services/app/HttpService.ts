@@ -1,20 +1,16 @@
 import {Service} from 'typedi';
 import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
+
+import {ConfigService} from './ConfigService';
+
 import auth from '../../api/endpoints/auth';
 import comics from '../../api/endpoints/comics';
 import arcs from '../../api/endpoints/arcs';
 import pages from '../../api/endpoints/pages';
 import chapters from '../../api/endpoints/chapters';
-
-import {ConfigService} from './ConfigService';
-import {ApiEndpoint} from '../../api/ApiEndpoint';
-
-export interface IHttpEndpoints {
-    [x: string]: ApiEndpoint;
-}
+import images from '../../api/endpoints/images';
 
 export interface IHttpOptions extends AxiosRequestConfig {
-    // endpoints: { [key: string]: ApiEndpoint }
 }
 
 const __endpointDefns = {
@@ -22,7 +18,8 @@ const __endpointDefns = {
     comics,
     arcs,
     chapters,
-    pages
+    pages,
+    images
 };
 
 type eDefns = typeof __endpointDefns;

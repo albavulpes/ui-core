@@ -84,3 +84,8 @@ interface StatusResponse {
     UserName: string;
     Email: string;
 }
+
+interface ImageResponse {
+    ImagePath: string;
+    ThumbnailPath: string;
+}
