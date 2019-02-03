@@ -8,6 +8,9 @@ var ToastService = (function () {
         this.ConfigService = ConfigService;
         iziToast.settings(this.ConfigService.configuration.toast);
     }
+    ToastService.prototype.clear = function () {
+        iziToast.destroy();
+    };
     ToastService.prototype.success = function (message, options) {
         iziToast.success(tslib_1.__assign({ message: message }, options));
     };

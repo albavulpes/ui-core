@@ -1,12 +1,20 @@
 import * as tslib_1 from "tslib";
 import { Service } from 'typedi';
 import axios from 'axios';
+import { ConfigService } from './ConfigService';
 import auth from '../../api/endpoints/auth';
 import comics from '../../api/endpoints/comics';
-import { ConfigService } from './ConfigService';
+import arcs from '../../api/endpoints/arcs';
+import pages from '../../api/endpoints/pages';
+import chapters from '../../api/endpoints/chapters';
+import images from '../../api/endpoints/images';
 var __endpointDefns = {
     auth: auth,
-    comics: comics
+    comics: comics,
+    arcs: arcs,
+    chapters: chapters,
+    pages: pages,
+    images: images
 };
 var HttpService = (function () {
     function HttpService(ConfigService) {

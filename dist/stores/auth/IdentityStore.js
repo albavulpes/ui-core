@@ -3,6 +3,7 @@ import { Inject, Service } from 'typedi';
 import { Action, Mutation, State, VuexStore } from '../../framework/decorators/Store';
 import { AuthService } from '../../services/auth/AuthService';
 import { ToastService } from '../../services/ui/ToastService';
+import { LoaderService } from '../../services/ui/LoaderService';
 var IdentityStore = (function (_super) {
     tslib_1.__extends(IdentityStore, _super);
     function IdentityStore() {
@@ -15,10 +16,12 @@ var IdentityStore = (function (_super) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
+                        this.LoaderService.show();
                         return [4, this.AuthService.me()];
                     case 1:
                         statusResponse = _a.sent();
                         this.updateIdentity(statusResponse);
+                        this.LoaderService.hide();
                         return [3, 3];
                     case 2:
                         error_1 = _a.sent();
@@ -45,6 +48,10 @@ var IdentityStore = (function (_super) {
         Inject(),
         tslib_1.__metadata("design:type", ToastService)
     ], IdentityStore.prototype, "ToastService", void 0);
+    tslib_1.__decorate([
+        Inject(),
+        tslib_1.__metadata("design:type", LoaderService)
+    ], IdentityStore.prototype, "LoaderService", void 0);
     tslib_1.__decorate([
         State(),
         tslib_1.__metadata("design:type", Boolean)
