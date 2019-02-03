@@ -2,14 +2,6 @@ interface ApiModel {
     Id: string;
 }
 
-interface Arc extends ApiModel {
-    ComicId: string;
-
-    Title: string;
-    Number: number;
-    CoverImage: Image;
-}
-
 declare type Role = 'Administrator' | 'Creator' | 'Member';
 
 interface User extends ApiModel {
@@ -18,6 +10,19 @@ interface User extends ApiModel {
     Password: string;
 
     Roles: Role[];
+}
+
+interface MediaContent extends ApiModel {
+    CoverImage: Image;
+}
+
+interface MediaContentCollection extends MediaContent {
+    Title: string;
+    Description: string;
+    Author: string;
+
+    CreatedDate: Date;
+    PublishDate: Date;
 }
 
 interface LoginRequest {
@@ -31,36 +36,25 @@ interface RegisterRequest {
     Password: string;
 }
 
-interface Arc extends ApiModel {
+interface Comic extends MediaContentCollection {
+}
+
+interface Arc extends MediaContentCollection {
     ComicId: string;
 
-    Title: string;
-    Number: number;
-    CoverImage: Image;
+    ArcNumber: number;
 }
 
-interface Chapter extends ApiModel {
+interface Chapter extends MediaContentCollection {
     ArcId: string;
 
-    Title: string;
     ChapterNumber: number;
-    CoverImage: Image;
 }
 
-interface Comic extends ApiModel {
-    Title: string;
-    Author: string;
-    Description: string;
-    ReleaseDate: Date | string;
-    CoverImage: Image;
-}
-
-interface Page extends ApiModel {
+interface Page extends MediaContent {
     ChapterId: string;
 
     PageNumber: number;
-
-    Image: Image;
 }
 
 interface Image {
