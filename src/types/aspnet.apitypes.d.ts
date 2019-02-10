@@ -70,6 +70,11 @@ interface ChapterResponse extends Chapter {
     PagesCount: number;
 }
 
+interface ChapterGroupResponse {
+    Arc: Arc;
+    Chapters: ChapterResponse[];
+}
+
 interface ComicResponse extends Comic {
     ArcsCount: number;
 }
