@@ -15,22 +15,25 @@ var IdentityStore = (function (_super) {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
                         this.LoaderService.show();
-                        return [4, this.AuthService.me()];
+                        _a.label = 1;
                     case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.AuthService.me()];
+                    case 2:
                         statusResponse = _a.sent();
                         this.updateIdentity(statusResponse);
-                        this.LoaderService.hide();
-                        return [3, 3];
-                    case 2:
+                        return [3, 4];
+                    case 3:
                         error_1 = _a.sent();
                         if (error_1.response && error_1.response.status !== 401) {
                             this.ToastService.error(error_1.message);
                         }
                         this.IsAuthenticated = false;
-                        return [3, 3];
-                    case 3: return [2];
+                        return [3, 4];
+                    case 4:
+                        this.LoaderService.hide();
+                        return [2];
                 }
             });
         });

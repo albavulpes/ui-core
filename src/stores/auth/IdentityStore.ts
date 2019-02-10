@@ -28,14 +28,12 @@ export class IdentityStore extends VuexStore {
 
     @Action()
     async fetchIdentity() {
-        try {
-            this.LoaderService.show();
+        this.LoaderService.show();
 
+        try {
             const statusResponse = await this.AuthService.me();
 
             this.updateIdentity(statusResponse);
-
-            this.LoaderService.hide();
         }
         catch (error) {
             if (error.response && error.response.status !== 401) {
@@ -44,6 +42,8 @@ export class IdentityStore extends VuexStore {
 
             this.IsAuthenticated = false;
         }
+
+        this.LoaderService.hide();
     }
 
     @Mutation()
