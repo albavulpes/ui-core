@@ -77,7 +77,7 @@ interface ChapterGroupResponse {
 }
 
 interface ComicResponse extends Comic {
-    ArcsCount: number;
+    ChaptersCount: number;
 }
 
 interface StatusResponse {
