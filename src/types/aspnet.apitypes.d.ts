@@ -46,6 +46,7 @@ interface Arc extends MediaContentCollection {
 }
 
 interface Chapter extends MediaContentCollection {
+    ComicId: string;
     ArcId: string;
 
     ChapterNumber: number;
