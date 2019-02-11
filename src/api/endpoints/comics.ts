@@ -1,14 +1,14 @@
 import {ApiEndpoint} from '../ApiEndpoint';
 
 export default class extends ApiEndpoint {
-    async getAll(): Promise<Comic[]> {
-        const response = await this.adapter.get<Comic[]>('/comics');
+    async getAll(): Promise<ComicResponse[]> {
+        const response = await this.adapter.get<ComicResponse[]>('/comics');
 
         return response.data;
     }
 
-    async get(id: string): Promise<Comic> {
-        const response = await this.adapter.get<Comic>(`/comics/${id}`);
+    async get(id: string): Promise<ComicResponse> {
+        const response = await this.adapter.get<ComicResponse>(`/comics/${id}`);
 
         return response.data;
     }
@@ -21,6 +21,16 @@ export default class extends ApiEndpoint {
 
     async put(id: string, data: Comic): Promise<Comic> {
         const response = await this.adapter.put<Comic>(`/comics/${id}`, data);
+
+        return response.data;
+    }
+
+    async publish(id: string, state: boolean): Promise<Comic> {
+        const response = await this.adapter.put<Comic>(`/comics/${id}/publish`, null, {
+            params: {
+                state
+            }
+        });
 
         return response.data;
     }
