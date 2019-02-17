@@ -1,1 +1,0 @@
-{"version":3,"sources":["plugins/auth/google-auth/GoogleAuthPlugin.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,YAAY,EAAC,MAAM,KAAK,CAAC;;AAEjC,wBAIyB","file":"GoogleAuthPlugin.d.ts","sourcesContent":["import {PluginObject} from 'vue';\r\n\r\nexport default {\r\n    install(Vue) {\r\n\r\n    }\r\n} as PluginObject<never>;"]}

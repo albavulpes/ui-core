@@ -4,9 +4,8 @@ import { ConfigService } from '../app/ConfigService';
 import 'izitoast/dist/css/iziToast.min.css';
 import iziToast from 'izitoast';
 var ToastService = (function () {
-    function ToastService(ConfigService) {
-        this.ConfigService = ConfigService;
-        iziToast.settings(this.ConfigService.configuration.toast);
+    function ToastService(configService) {
+        iziToast.settings(configService.configuration.toast);
     }
     ToastService.prototype.clear = function () {
         iziToast.destroy();

@@ -23,7 +23,7 @@ declare type EndpointInstancesMap = {
 export declare class HttpService {
     protected readonly _adapter: AxiosInstance;
     api: EndpointInstancesMap;
-    constructor(ConfigService: ConfigService);
+    constructor(configService: ConfigService);
     private configureEndpoints;
 }
 export {};

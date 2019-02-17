@@ -14,8 +14,7 @@ export interface IToastMethod {
 export interface IToastOptions extends IziToastSettings {
 }
 export declare class ToastService implements IToastService {
-    private ConfigService;
-    constructor(ConfigService: ConfigService);
+    constructor(configService: ConfigService);
     clear(): void;
     success(message: string, options?: IziToastSettings): void;
     error(message: string, options?: IziToastSettings): void;

@@ -30,6 +30,10 @@ interface LoginRequest {
     Password: string;
 }
 
+interface GoogleLoginRequest {
+    AuthToken: string;
+}
+
 interface RegisterRequest {
     UserName: string;
     Email: string;

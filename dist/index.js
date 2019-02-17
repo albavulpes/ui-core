@@ -6,12 +6,20 @@ var UiCore = (function () {
     function UiCore() {
     }
     UiCore.prototype.initCore = function (Vue, options) {
-        if (options.http) {
-            this.ConfigService.configure('http', options.http);
-        }
-        if (options.toast) {
-            this.ConfigService.configure('toast', options.toast);
-        }
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            return tslib_1.__generator(this, function (_a) {
+                if (options.config) {
+                    this.ConfigService.configure('config', options.config);
+                }
+                if (options.http) {
+                    this.ConfigService.configure('http', options.http);
+                }
+                if (options.toast) {
+                    this.ConfigService.configure('toast', options.toast);
+                }
+                return [2];
+            });
+        });
     };
     tslib_1.__decorate([
         Inject(),
@@ -24,7 +32,16 @@ var UiCore = (function () {
 }());
 export default {
     install: function (Vue, options) {
-        Container.get(UiCore).initCore(Vue, options);
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, Container.get(UiCore).initCore(Vue, options)];
+                    case 1:
+                        _a.sent();
+                        return [2];
+                }
+            });
+        });
     }
 };
 

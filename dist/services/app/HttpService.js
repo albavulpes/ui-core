@@ -17,8 +17,8 @@ var __endpointDefns = {
     images: images
 };
 var HttpService = (function () {
-    function HttpService(ConfigService) {
-        this._adapter = axios.create(ConfigService.configuration.http);
+    function HttpService(configService) {
+        this._adapter = axios.create(configService.configuration.http);
         this.configureEndpoints();
     }
     HttpService.prototype.configureEndpoints = function () {
