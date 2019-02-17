@@ -31,7 +31,7 @@ interface LoginRequest {
 }
 
 interface GoogleLoginRequest {
-    AuthToken: string;
+    AccessToken: string;
 }
 
 interface RegisterRequest {

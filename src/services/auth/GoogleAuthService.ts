@@ -22,10 +22,12 @@ export class GoogleAuthService {
     private IdentityStore: IdentityStore;
 
     async loginWithGoogle() {
-        const authToken = await sendAuthRequestToGoogle();
+        const accessToken = await sendAuthRequestToGoogle();
+
+        console.log(accessToken);
 
         const response = await this.HttpService.api.auth.loginWithGoogle({
-            AuthToken: authToken
+            AccessToken: accessToken
         });
 
         await this.IdentityStore.fetchIdentity();
@@ -42,6 +44,10 @@ async function initGoogleAPI() {
         (window as any).OnGoogleLoadCallback = function () {
             delete (window as any).OnGoogleLoadCallback;
 
+            gapi.client.init({
+                apiKey: 'AIzaSyBiuYS2xfCpFmhkDiz2WI8j5Fo4T1BlaAo' // TODO
+            });
+
             isGoogleApiLoaded = true;
 
             resolve();
@@ -57,20 +63,17 @@ async function sendAuthRequestToGoogle(): Promise<string> {
     await initGoogleAPI();
 
     return await new Promise<string>((resolve, reject) => {
-        gapi.client.setApiKey('AIzaSyBiuYS2xfCpFmhkDiz2WI8j5Fo4T1BlaAo'); //TODO
-
         gapi.auth.authorize({
-                client_id: '445973792215-f7iin0g2ed8iouaeeq0s7cag8io6nhug.apps.googleusercontent.com', //TODO
+                client_id: '445973792215-f7iin0g2ed8iouaeeq0s7cag8io6nhug.apps.googleusercontent.com', // TODO
                 scope: [
                     'https://www.googleapis.com/auth/userinfo.profile',
-                    'https://www.googleapis.com/auth/userinfo.email',
-                    'https://www.googleapis.com/auth/contacts.readonly'
+                    'https://www.googleapis.com/auth/userinfo.email'
                 ],
                 immediate: false
             },
             (authResult) => {
                 if (authResult.error && authResult.error !== 'popup_closed_by_user') {
-                    return reject(authResult.error);
+                    return reject(new Error(authResult.error));
                 }
 
                 resolve(authResult.access_token);
