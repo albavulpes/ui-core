@@ -6,7 +6,7 @@ export interface ILoaderService {
     hide(): void;
 }
 
-@Service()
+@Service({global: true})
 export class LoaderService implements ILoaderService {
 
     show(): void {

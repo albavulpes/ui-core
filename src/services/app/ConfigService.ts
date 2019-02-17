@@ -19,7 +19,7 @@ export interface IConfigurationMap {
     toast: IToastOptions;
 }
 
-@Service()
+@Service({global: true})
 export class ConfigService implements IConfigService {
     configuration: Partial<IConfigurationMap> = {};
 

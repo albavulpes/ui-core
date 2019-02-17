@@ -19,7 +19,7 @@ export interface IToastMethod {
 export interface IToastOptions extends IziToastSettings {
 }
 
-@Service()
+@Service({global: true})
 export class ToastService implements IToastService {
 
     constructor(configService: ConfigService) {
