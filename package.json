@@ -18,7 +18,10 @@
     "dist/"
   ],
   "dependencies": {
+    "@types/gapi": "^0.0.36",
+    "@types/scriptjs": "^0.0.2",
     "reflect-metadata": "^0.1.12",
+    "scriptjs": "^2.5.9",
     "url-parse": "^1.4.4"
   },
   "peerDependencies": {

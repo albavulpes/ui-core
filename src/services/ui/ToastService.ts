@@ -22,8 +22,8 @@ export interface IToastOptions extends IziToastSettings {
 @Service()
 export class ToastService implements IToastService {
 
-    constructor(private ConfigService: ConfigService) {
-        iziToast.settings(this.ConfigService.configuration.toast);
+    constructor(configService: ConfigService) {
+        iziToast.settings(configService.configuration.toast);
     }
 
     clear() {

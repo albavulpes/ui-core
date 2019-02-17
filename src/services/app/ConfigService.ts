@@ -9,7 +9,12 @@ export interface IConfigService {
     configure<TKey extends keyof IConfigurationMap>(configKey: TKey, configuration: IConfigurationMap[TKey]): void;
 }
 
+export interface IConfigOptions {
+    api: boolean;
+}
+
 export interface IConfigurationMap {
+    config: IConfigOptions;
     http: IHttpOptions;
     toast: IToastOptions;
 }

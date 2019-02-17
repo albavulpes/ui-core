@@ -24,4 +24,10 @@ export default class extends ApiEndpoint {
 
         return response.data;
     }
+
+    async loginWithGoogle(googleLoginRequest: GoogleLoginRequest): Promise<void> {
+        const response = await this.adapter.post<void>('/auth/google', googleLoginRequest);
+
+        return response.data;
+    }
 }

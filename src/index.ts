@@ -11,7 +11,10 @@ class UiCore {
     @Inject()
     private ConfigService: ConfigService;
 
-    initCore(Vue: VueConstructor<Vue>, options: IConfigurationMap) {
+    async initCore(Vue: VueConstructor<Vue>, options: Partial<IConfigurationMap>) {
+        if (options.config) {
+            this.ConfigService.configure('config', options.config);
+        }
         if (options.http) {
             this.ConfigService.configure('http', options.http);
         }
@@ -22,7 +25,7 @@ class UiCore {
 }
 
 export default {
-    install(Vue, options) {
-        Container.get(UiCore).initCore(Vue, options);
+    async install(Vue, options) {
+        await Container.get(UiCore).initCore(Vue, options);
     }
 } as PluginObject<IConfigurationMap>;

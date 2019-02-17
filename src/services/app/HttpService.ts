@@ -34,8 +34,8 @@ export class HttpService {
 
     api: EndpointInstancesMap;
 
-    constructor(ConfigService: ConfigService) {
-        this._adapter = axios.create(ConfigService.configuration.http);
+    constructor(configService: ConfigService) {
+        this._adapter = axios.create(configService.configuration.http);
 
         this.configureEndpoints();
     }
