@@ -28,4 +28,10 @@ export default class extends ApiEndpoint {
 
         return response.data;
     }
+
+    async reorder(id: string, index: number): Promise<Page> {
+        const response = await this.adapter.put<Page>(`/pages/${id}/reorder/${index}`);
+
+        return response.data;
+    }
 }
