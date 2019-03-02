@@ -9,10 +9,18 @@ export interface ILoaderService {
 @Service({global: true})
 export class LoaderService implements ILoaderService {
 
+    isShown = false;
+
     show(): void {
         const loader = getLoaderInstance();
         if (loader) {
-            loader.classList.add('shown');
+            this.isShown = true;
+
+            setTimeout(() => {
+                if (this.isShown) {
+                    loader.classList.add('shown');
+                }
+            }, 750);
         }
     }
 
@@ -20,6 +28,8 @@ export class LoaderService implements ILoaderService {
         const loader = getLoaderInstance();
         if (loader) {
             loader.classList.remove('shown');
+
+            this.isShown = false;
         }
     }
 }
