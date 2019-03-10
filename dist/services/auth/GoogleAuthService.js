@@ -3,6 +3,7 @@ import { Inject, Service } from 'typedi';
 import { ConfigService } from '../app/ConfigService';
 import { HttpService } from '../app/HttpService';
 import { IdentityStore } from '../../stores/auth/IdentityStore';
+import { ToastService } from '../ui/ToastService';
 import $script from 'scriptjs';
 var GOOGLEAPI_CDN_URL = 'https://apis.google.com/js/client.js?onload=OnGoogleLoadCallback';
 var isGoogleApiLoaded = false;
@@ -11,22 +12,37 @@ var GoogleAuthService = (function () {
     }
     GoogleAuthService.prototype.loginWithGoogle = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var accessToken, response;
+            var accessToken, response, error_1;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, sendAuthRequestToGoogle()];
                     case 1:
                         accessToken = _a.sent();
-                        console.log(accessToken);
+                        _a.label = 2;
+                    case 2:
+                        _a.trys.push([2, 5, , 9]);
                         return [4, this.HttpService.api.auth.loginWithGoogle({
                                 AccessToken: accessToken
                             })];
-                    case 2:
+                    case 3:
                         response = _a.sent();
                         return [4, this.IdentityStore.fetchIdentity()];
-                    case 3:
+                    case 4:
                         _a.sent();
                         return [2, response];
+                    case 5:
+                        error_1 = _a.sent();
+                        if (!(error_1.response && error_1.response.status === 400)) return [3, 7];
+                        this.ToastService.error("Could not sign in. Please try again.");
+                        return [4, signOutFromGoogle()];
+                    case 6:
+                        _a.sent();
+                        return [3, 8];
+                    case 7:
+                        this.ToastService.error(error_1.message);
+                        _a.label = 8;
+                    case 8: return [3, 9];
+                    case 9: return [2];
                 }
             });
         });
@@ -43,6 +59,10 @@ var GoogleAuthService = (function () {
         Inject(),
         tslib_1.__metadata("design:type", IdentityStore)
     ], GoogleAuthService.prototype, "IdentityStore", void 0);
+    tslib_1.__decorate([
+        Inject(),
+        tslib_1.__metadata("design:type", ToastService)
+    ], GoogleAuthService.prototype, "ToastService", void 0);
     GoogleAuthService = tslib_1.__decorate([
         Service()
     ], GoogleAuthService);
@@ -96,6 +116,19 @@ function sendAuthRequestToGoogle() {
                             });
                         })];
                 case 2: return [2, _a.sent()];
+            }
+        });
+    });
+}
+function signOutFromGoogle() {
+    return tslib_1.__awaiter(this, void 0, void 0, function () {
+        return tslib_1.__generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4, initGoogleAPI()];
+                case 1:
+                    _a.sent();
+                    gapi.auth.signOut();
+                    return [2];
             }
         });
     });

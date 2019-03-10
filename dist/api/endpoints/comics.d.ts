@@ -4,5 +4,6 @@ export default class extends ApiEndpoint {
     get(id: string): Promise<ComicResponse>;
     post(data: Comic): Promise<Comic>;
     put(id: string, data: Comic): Promise<Comic>;
+    delete(id: string): Promise<Comic>;
     publish(id: string, state: boolean): Promise<Comic>;
 }
