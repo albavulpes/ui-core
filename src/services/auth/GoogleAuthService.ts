@@ -2,6 +2,8 @@ import {Inject, Service} from 'typedi';
 import {ConfigService} from '../app/ConfigService';
 import {HttpService} from '../app/HttpService';
 import {IdentityStore} from '../../stores/auth/IdentityStore';
+import {AxiosError} from 'axios';
+import {ToastService} from '../ui/ToastService';
 
 import $script from 'scriptjs';
 
@@ -21,18 +23,31 @@ export class GoogleAuthService {
     @Inject()
     private IdentityStore: IdentityStore;
 
+    @Inject()
+    private ToastService: ToastService;
+
     async loginWithGoogle() {
         const accessToken = await sendAuthRequestToGoogle();
 
-        console.log(accessToken);
+        try {
+            const response = await this.HttpService.api.auth.loginWithGoogle({
+                AccessToken: accessToken
+            });
 
-        const response = await this.HttpService.api.auth.loginWithGoogle({
-            AccessToken: accessToken
-        });
+            await this.IdentityStore.fetchIdentity();
 
-        await this.IdentityStore.fetchIdentity();
+            return response;
+        }
+        catch (error) {
+            if (error.response && error.response.status === 400) {
+                this.ToastService.error(`Could not sign in. Please try again.`);
 
-        return response;
+                await signOutFromGoogle();
+            }
+            else {
+                this.ToastService.error(error.message);
+            }
+        }
     }
 }
 
@@ -80,4 +95,10 @@ async function sendAuthRequestToGoogle(): Promise<string> {
             }
         );
     });
+}
+
+async function signOutFromGoogle(): Promise<void> {
+    await initGoogleAPI();
+
+    gapi.auth.signOut();
 }
