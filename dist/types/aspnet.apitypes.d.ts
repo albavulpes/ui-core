@@ -14,15 +14,17 @@ interface User extends ApiModel {
 
 interface MediaContent extends ApiModel {
     CoverImage: Image;
+
+    CreatedDate: Date;
+    PublishDate: Date;
+
+    readonly IsPublished: boolean;
 }
 
 interface MediaContentCollection extends MediaContent {
     Title: string;
     Description: string;
     Author: string;
-
-    CreatedDate: Date;
-    PublishDate: Date;
 }
 
 interface LoginRequest {
@@ -31,7 +33,7 @@ interface LoginRequest {
 }
 
 interface GoogleLoginRequest {
-    AuthToken: string;
+    AccessToken: string;
 }
 
 interface RegisterRequest {

@@ -9,7 +9,7 @@ var ConfigService = (function () {
         this.configuration[configKey] = merge((this.configuration[configKey] || {}), configuration);
     };
     ConfigService = tslib_1.__decorate([
-        Service()
+        Service({ global: true })
     ], ConfigService);
     return ConfigService;
 }());

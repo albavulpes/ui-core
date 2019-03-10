@@ -3,6 +3,7 @@ export interface ILoaderService {
     hide(): void;
 }
 export declare class LoaderService implements ILoaderService {
+    isShown: boolean;
     show(): void;
     hide(): void;
 }

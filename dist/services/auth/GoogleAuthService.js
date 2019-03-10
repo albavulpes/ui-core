@@ -11,14 +11,15 @@ var GoogleAuthService = (function () {
     }
     GoogleAuthService.prototype.loginWithGoogle = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var authToken, response;
+            var accessToken, response;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, sendAuthRequestToGoogle()];
                     case 1:
-                        authToken = _a.sent();
+                        accessToken = _a.sent();
+                        console.log(accessToken);
                         return [4, this.HttpService.api.auth.loginWithGoogle({
-                                AuthToken: authToken
+                                AccessToken: accessToken
                             })];
                     case 2:
                         response = _a.sent();
@@ -58,6 +59,9 @@ function initGoogleAPI() {
                     return [4, new Promise(function (resolve) {
                             window.OnGoogleLoadCallback = function () {
                                 delete window.OnGoogleLoadCallback;
+                                gapi.client.init({
+                                    apiKey: 'AIzaSyBiuYS2xfCpFmhkDiz2WI8j5Fo4T1BlaAo'
+                                });
                                 isGoogleApiLoaded = true;
                                 resolve();
                             };
@@ -77,18 +81,16 @@ function sendAuthRequestToGoogle() {
                 case 1:
                     _a.sent();
                     return [4, new Promise(function (resolve, reject) {
-                            gapi.client.setApiKey('AIzaSyBiuYS2xfCpFmhkDiz2WI8j5Fo4T1BlaAo');
                             gapi.auth.authorize({
                                 client_id: '445973792215-f7iin0g2ed8iouaeeq0s7cag8io6nhug.apps.googleusercontent.com',
                                 scope: [
                                     'https://www.googleapis.com/auth/userinfo.profile',
-                                    'https://www.googleapis.com/auth/userinfo.email',
-                                    'https://www.googleapis.com/auth/contacts.readonly'
+                                    'https://www.googleapis.com/auth/userinfo.email'
                                 ],
                                 immediate: false
                             }, function (authResult) {
                                 if (authResult.error && authResult.error !== 'popup_closed_by_user') {
-                                    return reject(authResult.error);
+                                    return reject(new Error(authResult.error));
                                 }
                                 resolve(authResult.access_token);
                             });

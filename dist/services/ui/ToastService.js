@@ -23,7 +23,7 @@ var ToastService = (function () {
         iziToast.warning(tslib_1.__assign({ message: message }, options));
     };
     ToastService = tslib_1.__decorate([
-        Service(),
+        Service({ global: true }),
         tslib_1.__metadata("design:paramtypes", [ConfigService])
     ], ToastService);
     return ToastService;
