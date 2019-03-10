@@ -29,7 +29,19 @@ export default class extends ApiEndpoint {
         return response.data;
     }
 
-    async remove(id: string): Promise<void> {
-        await this.adapter.delete(`/chapters/${id}`);
+    async delete(id: string): Promise<Chapter> {
+        const response = await this.adapter.delete(`/chapters/${id}`);
+
+        return response.data;
+    }
+
+    async publish(id: string, state: boolean): Promise<Chapter> {
+        const response = await this.adapter.put<Chapter>(`/chapters/${id}/publish`, null, {
+            params: {
+                state
+            }
+        });
+
+        return response.data;
     }
 }

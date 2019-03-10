@@ -25,6 +25,12 @@ export default class extends ApiEndpoint {
         return response.data;
     }
 
+    async delete(id: string): Promise<Comic> {
+        const response = await this.adapter.delete(`/comics/${id}`);
+
+        return response.data;
+    }
+
     async publish(id: string, state: boolean): Promise<Comic> {
         const response = await this.adapter.put<Comic>(`/comics/${id}/publish`, null, {
             params: {
