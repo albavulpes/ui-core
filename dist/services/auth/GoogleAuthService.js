@@ -127,6 +127,7 @@ function signOutFromGoogle() {
                 case 0: return [4, initGoogleAPI()];
                 case 1:
                     _a.sent();
+                    gapi.auth.setToken(null);
                     gapi.auth.signOut();
                     return [2];
             }

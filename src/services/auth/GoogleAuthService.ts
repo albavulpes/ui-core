@@ -100,5 +100,6 @@ async function sendAuthRequestToGoogle(): Promise<string> {
 async function signOutFromGoogle(): Promise<void> {
     await initGoogleAPI();
 
+    gapi.auth.setToken(null);
     gapi.auth.signOut();
 }
