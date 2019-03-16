@@ -60,7 +60,7 @@ async function initGoogleAPI() {
             delete (window as any).OnGoogleLoadCallback;
 
             gapi.client.init({
-                apiKey: 'AIzaSyBiuYS2xfCpFmhkDiz2WI8j5Fo4T1BlaAo' // TODO
+                apiKey: 'AIzaSyBiuYS2xfCpFmhkDiz2WI8j5Fo4T1BlaAo' // TODO: Need to be sent from api
             });
 
             isGoogleApiLoaded = true;
@@ -79,7 +79,7 @@ async function sendAuthRequestToGoogle(): Promise<string> {
 
     return await new Promise<string>((resolve, reject) => {
         gapi.auth.authorize({
-                client_id: '445973792215-f7iin0g2ed8iouaeeq0s7cag8io6nhug.apps.googleusercontent.com', // TODO
+                client_id: '445973792215-f7iin0g2ed8iouaeeq0s7cag8io6nhug.apps.googleusercontent.com', // TODO: Need to be sent from api
                 scope: [
                     'https://www.googleapis.com/auth/userinfo.profile',
                     'https://www.googleapis.com/auth/userinfo.email'

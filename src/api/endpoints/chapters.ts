@@ -44,4 +44,10 @@ export default class extends ApiEndpoint {
 
         return response.data;
     }
+
+    async reorder(id: string, index: number): Promise<Chapter> {
+        const response = await this.adapter.put<Chapter>(`/chapters/${id}/reorder/${index}`);
+
+        return response.data;
+    }
 }
