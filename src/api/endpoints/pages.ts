@@ -29,6 +29,16 @@ export default class extends ApiEndpoint {
         return response.data;
     }
 
+    async publish(id: string, state: boolean): Promise<Page> {
+        const response = await this.adapter.put<Page>(`/pages/${id}/publish`, null, {
+            params: {
+                state
+            }
+        });
+
+        return response.data;
+    }
+
     async reorder(id: string, index: number): Promise<Page> {
         const response = await this.adapter.put<Page>(`/pages/${id}/reorder/${index}`);
 
