@@ -61,6 +61,23 @@ var default_1 = (function (_super) {
             });
         });
     };
+    default_1.prototype.publish = function (id, state) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var response;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.adapter.put("/pages/" + id + "/publish", null, {
+                            params: {
+                                state: state
+                            }
+                        })];
+                    case 1:
+                        response = _a.sent();
+                        return [2, response.data];
+                }
+            });
+        });
+    };
     default_1.prototype.reorder = function (id, index) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var response;

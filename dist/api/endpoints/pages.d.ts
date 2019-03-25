@@ -4,5 +4,6 @@ export default class extends ApiEndpoint {
     get(id: string): Promise<Page>;
     post(data: Page): Promise<Page>;
     put(id: string, data: Page): Promise<Page>;
+    publish(id: string, state: boolean): Promise<Page>;
     reorder(id: string, index: number): Promise<Page>;
 }

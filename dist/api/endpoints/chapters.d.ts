@@ -6,4 +6,5 @@ export default class extends ApiEndpoint {
     put(id: string, data: Chapter): Promise<Chapter>;
     delete(id: string): Promise<Chapter>;
     publish(id: string, state: boolean): Promise<Chapter>;
+    reorder(id: string, index: number): Promise<Chapter>;
 }
