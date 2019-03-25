@@ -1,6 +1,6 @@
 {
   "name": "@albavulpes/ui-core",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "author": "cypherix93",
   "description": "Data access layer for AlbaVulpes frontend clients.",
   "homepage": "https://github.com/albavulpes/ui-data#readme",
