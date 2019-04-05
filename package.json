@@ -22,7 +22,8 @@
     "@types/scriptjs": "^0.0.2",
     "reflect-metadata": "^0.1.12",
     "scriptjs": "^2.5.9",
-    "url-parse": "^1.4.4"
+    "url-parse": "^1.4.4",
+    "vue": "^2.5.17"
   },
   "peerDependencies": {
     "axios": "^0.18.0",

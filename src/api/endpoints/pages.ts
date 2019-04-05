@@ -17,6 +17,29 @@ export default class extends ApiEndpoint {
         return response.data;
     }
 
+    async getByPageNumber(chapterId: string, pageNumber: number): Promise<Page> {
+        const response = await this.adapter.get<Page>('/pages', {
+            params: {
+                chapterId,
+                pageNumber
+            }
+        });
+
+        return response.data;
+    }
+
+    async getPreviousPage(pageId: string): Promise<Page> {
+        const response = await this.adapter.get<Page>(`/pages/${pageId}/previous`);
+
+        return response.data;
+    }
+
+    async getNextPage(pageId: string): Promise<Page> {
+        const response = await this.adapter.get<Page>(`/pages/${pageId}/next`);
+
+        return response.data;
+    }
+
     async post(data: Page): Promise<Page> {
         const response = await this.adapter.post<Page>(`/pages`, data);
 
