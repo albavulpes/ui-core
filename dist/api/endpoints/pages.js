@@ -35,6 +35,50 @@ var default_1 = (function (_super) {
             });
         });
     };
+    default_1.prototype.getByPageNumber = function (chapterId, pageNumber) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var response;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.adapter.get('/pages', {
+                            params: {
+                                chapterId: chapterId,
+                                pageNumber: pageNumber
+                            }
+                        })];
+                    case 1:
+                        response = _a.sent();
+                        return [2, response.data];
+                }
+            });
+        });
+    };
+    default_1.prototype.getPreviousPage = function (pageId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var response;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.adapter.get("/pages/" + pageId + "/previous")];
+                    case 1:
+                        response = _a.sent();
+                        return [2, response.data];
+                }
+            });
+        });
+    };
+    default_1.prototype.getNextPage = function (pageId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var response;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.adapter.get("/pages/" + pageId + "/next")];
+                    case 1:
+                        response = _a.sent();
+                        return [2, response.data];
+                }
+            });
+        });
+    };
     default_1.prototype.post = function (data) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var response;
